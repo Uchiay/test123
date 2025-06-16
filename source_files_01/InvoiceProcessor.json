@@ -1,0 +1,27 @@
+{
+  "className": "InvoiceProcessor",
+  "uses": ["Customer", "Order"],
+  "businessRules": [
+    {
+      "description": "If customer type is VIP and order total > $1000, apply 10% discount.",
+      "condition": {
+        "customer.type": "VIP",
+        "order.totalAmount": { "greaterThan": 1000 }
+      },
+      "action": {
+        "applyDiscount": 0.1
+      },
+      "relatedEntities": ["Customer", "Order"]
+    },
+    {
+      "description": "If order total exceeds customer's credit limit, flag for review.",
+      "condition": {
+        "order.totalAmount": { "greaterThan": "customer.creditLimit" }
+      },
+      "action": {
+        "flag": "manual_review"
+      },
+      "relatedEntities": ["Customer", "Order"]
+    }
+  ]
+}

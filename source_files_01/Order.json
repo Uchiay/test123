@@ -1,0 +1,9 @@
+{
+  "orderId": "ORD456",
+  "customerId": "CUST123",
+  "totalAmount": 1200,
+  "items": [
+    {"itemId": "A1", "price": 200},
+    {"itemId": "B2", "price": 1000}
+  ]
+}

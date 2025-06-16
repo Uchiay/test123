@@ -1,0 +1,41 @@
+{
+  "processInvoice": {
+    "input": {
+      "customerId": "String",
+      "orderId": "String"
+    },
+    "output": "InvoiceResult",
+    "steps": [
+      {
+        "action": "Retrieve customer information",
+        "details": "Get customer data (type and credit limit) using the provided customer ID"
+      },
+      {
+        "action": "Retrieve order information",
+        "details": "Get order details with item total and tax using the provided order ID"
+      },
+      {
+        "action": "Calculate total order amount",
+        "formula": "totalAmount = itemTotal + tax",
+        "details": "Add the tax to the item total to calculate the total order amount"
+      },
+      {
+        "action": "Calculate discount",
+        "formula": "discount = totalAmount * 0.10",
+        "conditions": "customer.type is 'VIP' and totalAmount > 1000",
+        "details": "Provide a 10% discount on the total order amount if the customer is of VIP type and the total order amount is greater than 1000"
+      },
+      {
+        "action": "Calculate final order amount",
+        "formula": "finalAmount = totalAmount - discount",
+        "details": "Subtract the discount from the total order amount to calculate the final amount"
+      },
+      {
+        "action": "Determine if order requires manual review",
+        "condition": "totalAmount > customer.creditLimit",
+        "output": "requiresReview",
+        "details": "Check if the total order amount exceeds the customer's credit limit to determine if a manual review is necessary"
+      }
+    ]
+  }
+}
